@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Documentacao StackOS Genesis</title>
+<link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@300;400;600;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#05081c;--blue:#3d78d8;--purple:#7b2ff7;--white:#e0e8ff;--dim:#a0b4d8;--card:#0d1530;--border:#1e2d5a;--sidebar:280px}
+*{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--white);font-family:'Exo 2',sans-serif;display:flex;min-height:100vh}
+.sidebar{width:var(--sidebar);background:var(--card);border-right:1px solid var(--border);position:fixed;top:0;left:0;bottom:0;overflow-y:auto;z-index:10}
+.sidebar-logo{padding:1.5rem;border-bottom:1px solid var(--border);font-size:1.1rem;font-weight:800;color:var(--blue);text-decoration:none;display:block}
+.sidebar-logo span{color:var(--white)}
+.sidebar-version{padding:.5rem 1.5rem 1rem;font-family:'JetBrains Mono',monospace;font-size:.75rem;color:var(--dim);border-bottom:1px solid var(--border)}
+.sidebar-section{padding:1.2rem 1.5rem .5rem;font-size:.7rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--dim)}
+.sidebar-link{display:block;padding:.5rem 1.5rem;color:var(--dim);text-decoration:none;font-size:.9rem;transition:color .2s,background .2s;border-left:2px solid transparent}
+.sidebar-link:hover{color:var(--white);background:rgba(61,120,216,.08)}
+.sidebar-link.active{color:var(--blue);border-left-color:var(--blue);background:rgba(61,120,216,.1)}
+.main{margin-left:var(--sidebar);flex:1;padding:3rem 4rem;max-width:900px}
+.doc-section{margin-bottom:4rem}
+.doc-section h1{font-size:2.2rem;font-weight:800;margin-bottom:.5rem}
+.doc-section h2{font-size:1.4rem;font-weight:700;margin:2rem 0 1rem;padding-bottom:.5rem;border-bottom:1px solid var(--border)}
+.doc-section p{color:var(--dim);line-height:1.8;margin-bottom:1rem;font-size:.95rem}
+.doc-section ul,.doc-section ol{color:var(--dim);padding-left:1.5rem;margin-bottom:1rem}
+.doc-section li{line-height:1.8;font-size:.95rem}
+.doc-badge{display:inline-block;background:rgba(61,120,216,.15);border:1px solid rgba(61,120,216,.3);color:var(--blue);font-family:'JetBrains Mono',monospace;font-size:.7rem;padding:.2rem .6rem;border-radius:4px;margin-left:.5rem;vertical-align:middle}
+.doc-badge.green{background:rgba(40,200,64,.15);border-color:rgba(40,200,64,.3);color:#28c840}
+pre{background:#080c1e;border:1px solid var(--border);border-radius:8px;padding:1.2rem 1.5rem;margin:1rem 0;overflow-x:auto;font-family:'JetBrains Mono',monospace;font-size:.85rem;line-height:1.6}
+code{background:rgba(61,120,216,.1);border:1px solid rgba(61,120,216,.2);border-radius:4px;padding:.1rem .4rem;font-family:'JetBrains Mono',monospace;font-size:.85rem;color:var(--blue)}
+pre code{background:none;border:none;padding:0;color:var(--dim)}
+.cmd{color:#28c840}.comment{color:#4a5a8a}
+.info-card{background:rgba(61,120,216,.08);border:1px solid rgba(61,120,216,.25);border-radius:8px;padding:1.2rem 1.5rem;margin:1rem 0}
+.info-card.warn{background:rgba(254,188,46,.08);border-color:rgba(254,188,46,.25)}
+.info-card.warn p{color:#febc2e}.info-card p{color:var(--blue);margin:0;font-size:.9rem}
+table{width:100%;border-collapse:collapse;margin:1rem 0;font-size:.9rem}
+th{background:var(--card);color:var(--blue);padding:.8rem 1rem;text-align:left;border:1px solid var(--border);font-weight:700}
+td{padding:.7rem 1rem;border:1px solid var(--border);color:var(--dim)}
+.divider{border:none;border-top:1px solid var(--border);margin:3rem 0}
+@media(max-width:768px){.sidebar{display:none}.main{margin-left:0;padding:2rem 1.5rem}}
+</style>
+</head>
+<body>
+<div class="sidebar">
+  <a href="../" class="sidebar-logo">&#9889; Stack<span>OS</span></a>
+  <div class="sidebar-version">Genesis 1.0 &mdash; Documentacao</div>
+  <div class="sidebar-section">Inicio</div>
+  <a href="#introducao" class="sidebar-link active">Introducao</a>
+  <a href="#requisitos" class="sidebar-link">Requisitos</a>
+  <a href="#download" class="sidebar-link">Download</a>
+  <div class="sidebar-section">Instalacao</div>
+  <a href="#pendrive" class="sidebar-link">Criar Pendrive</a>
+  <a href="#boot" class="sidebar-link">Boot pelo Pendrive</a>
+  <a href="#instalador" class="sidebar-link">Usando o Instalador</a>
+  <a href="#pos-install" class="sidebar-link">Pos-Instalacao</a>
+  <div class="sidebar-section">Repositorio</div>
+  <a href="#repo" class="sidebar-link">Adicionar Repositorio</a>
+  <a href="#pacotes" class="sidebar-link">Pacotes StackOS</a>
+  <div class="sidebar-section">Aplicativos</div>
+  <a href="#store" class="sidebar-link">StackOS Store</a>
+  <a href="#drivers" class="sidebar-link">StackOS Drivers</a>
+  <div class="sidebar-section">Avancado</div>
+  <a href="#dualboot" class="sidebar-link">Dual Boot</a>
+  <a href="#troubleshoot" class="sidebar-link">Solucao de Problemas</a>
+  <a href="#comunidade" class="sidebar-link">Comunidade</a>
+</div>
+<div class="main">
+<div class="doc-section" id="introducao">
+  <h1>&#9889; StackOS Genesis <span class="doc-badge">v1.0</span></h1>
+  <p>Documentacao oficial do StackOS Genesis &mdash; distribuicao Linux baseada no Ubuntu 26.04 LTS.</p>
+  <div class="info-card"><p>Use o menu lateral para navegar.</p></div>
+  <h2>O que e o StackOS Genesis?</h2>
+  <ul>
+    <li>Sistema live com GNOME 50.1</li>
+    <li>Instalador GTK proprio com 3 modos</li>
+    <li>Repositorio APT online</li>
+    <li>Tema StackOS-Dark exclusivo</li>
+    <li>Ferramentas: Store, Drivers, Fastfetch</li>
+    <li>Sem Snap</li>
+  </ul>
+  <h2 id="requisitos">Requisitos</h2>
+  <table>
+    <tr><th>Componente</th><th>Minimo</th><th>Recomendado</th></tr>
+    <tr><td>CPU</td><td>64-bit 2GHz</td><td>AMD Ryzen 5 / Intel i5</td></tr>
+    <tr><td>RAM</td><td>4 GB</td><td>8 GB</td></tr>
+    <tr><td>Disco</td><td>20 GB</td><td>50 GB</td></tr>
+    <tr><td>Boot</td><td>UEFI ou BIOS</td><td>UEFI</td></tr>
+  </table>
+</div>
+<hr class="divider">
+<div class="doc-section" id="download">
+  <h1>Download</h1>
+  <table>
+    <tr><th>Versao</th><th>Tamanho</th><th>Link</th></tr>
+    <tr><td>Genesis 1.0 <span class="doc-badge green">Estavel</span></td><td>~2.3 GB</td><td><a href="https://archive.org/download/stackos-genesis-1.0/stackos-1.0-amd64.iso" style="color:var(--blue)">Download ISO</a></td></tr>
+  </table>
+</div>
+<hr class="divider">
+<div class="doc-section" id="pendrive">
+  <h1>Criar Pendrive Bootavel</h1>
+  <h2>No Linux</h2>
+  <pre><code><span class="comment"># Identificar pendrive</span>
+<span class="cmd">lsblk</span>
+<span class="comment"># Gravar ISO</span>
+<span class="cmd">sudo dd</span> if=stackos-1.0-amd64.iso of=/dev/sdb bs=4M status=progress oflag=sync</code></pre>
+  <div class="info-card warn"><p>Atencao: substitua /dev/sdb pelo seu dispositivo. Todos os dados serao apagados.</p></div>
+  <h2>No Windows</h2>
+  <p>Use o Rufus (rufus.ie) ou Balena Etcher. Selecione a ISO e grave no pendrive.</p>
+</div>
+<hr class="divider">
+<div class="doc-section" id="boot">
+  <h1>Boot pelo Pendrive</h1>
+  <table>
+    <tr><th>Fabricante</th><th>Boot Menu</th><th>BIOS/UEFI</th></tr>
+    <tr><td>Acer</td><td>F12</td><td>F2 / Del</td></tr>
+    <tr><td>ASUS</td><td>F8</td><td>F2 / Del</td></tr>
+    <tr><td>Dell</td><td>F12</td><td>F2</td></tr>
+    <tr><td>HP</td><td>F9 / Esc</td><td>F10</td></tr>
+    <tr><td>Lenovo</td><td>F12</td><td>F1 / F2</td></tr>
+  </table>
+  <div class="info-card"><p>Se o boot nao funcionar, desative o Secure Boot nas configuracoes UEFI.</p></div>
+</div>
+<hr class="divider">
+<div class="doc-section" id="instalador">
+  <h1>Usando o Instalador</h1>
+  <h2>Modos de instalacao</h2>
+  <ul>
+    <li><strong>Apagar disco inteiro</strong> &mdash; Apaga tudo e instala o StackOS.</li>
+    <li><strong>Dual boot</strong> &mdash; Instala ao lado do sistema existente.</li>
+    <li><strong>Particionamento manual</strong> &mdash; Abre o GParted.</li>
+  </ul>
+  <div class="info-card warn"><p>O modo apagar disco remove todos os dados permanentemente.</p></div>
+</div>
+<hr class="divider">
+<div class="doc-section" id="pos-install">
+  <h1>Pos-Instalacao</h1>
+  <pre><code><span class="cmd">sudo apt update</span> &amp;&amp; <span class="cmd">sudo apt upgrade</span> -y
+<span class="cmd">sudo apt install</span> stackos-store stackos-drivers stackos-themes</code></pre>
+</div>
+<hr class="divider">
+<div class="doc-section" id="repo">
+  <h1>Repositorio StackOS</h1>
+  <pre><code>echo "deb [trusted=yes] https://stackoslinux-dev.github.io/repo genesis main" | \
+  <span class="cmd">sudo tee</span> /etc/apt/sources.list.d/stackos.list
+<span class="cmd">sudo apt update</span></code></pre>
+  <h2 id="pacotes">Pacotes disponiveis</h2>
+  <table>
+    <tr><th>Pacote</th><th>Versao</th><th>Descricao</th></tr>
+    <tr><td><code>stackos-installer</code></td><td>1.0</td><td>Instalador GTK</td></tr>
+    <tr><td><code>stackos-store</code></td><td>1.0</td><td>Loja de aplicativos</td></tr>
+    <tr><td><code>stackos-drivers</code></td><td>1.0</td><td>Gerenciador de drivers</td></tr>
+    <tr><td><code>stackos-fastfetch</code></td><td>1.0</td><td>Config fastfetch</td></tr>
+    <tr><td><code>stackos-wallpapers</code></td><td>1.0</td><td>Wallpapers oficiais</td></tr>
+    <tr><td><code>stackos-themes</code></td><td>1.0</td><td>Tema StackOS-Dark</td></tr>
+    <tr><td><code>stackos-branding</code></td><td>1.0</td><td>Logos e identidade visual</td></tr>
+    <tr><td><code>stackos-settings</code></td><td>1.0</td><td>Configuracoes GNOME</td></tr>
+  </table>
+</div>
+<hr class="divider">
+<div class="doc-section" id="store">
+  <h1>StackOS Store</h1>
+  <pre><code><span class="cmd">sudo apt install</span> stackos-store</code></pre>
+  <h2>Categorias</h2>
+  <ul>
+    <li>Internet, Desenvolvimento, Multimidia, Office, Sistema, Jogos, Seguranca, Backups</li>
+  </ul>
+</div>
+<hr class="divider">
+<div class="doc-section" id="drivers">
+  <h1>StackOS Drivers</h1>
+  <pre><code><span class="cmd">sudo apt install</span> stackos-drivers</code></pre>
+  <h2>Suporte</h2>
+  <ul>
+    <li>NVIDIA, AMD GPU, Intel, WiFi MediaTek/Realtek/Intel</li>
+  </ul>
+</div>
+<hr class="divider">
+<div class="doc-section" id="dualboot">
+  <h1>Dual Boot</h1>
+  <div class="info-card warn"><p>Faca backup antes de instalar em dual boot.</p></div>
+  <ul>
+    <li>Minimo 20GB de espaco livre</li>
+    <li>Windows Fast Startup desativado</li>
+    <li>Secure Boot desativado</li>
+  </ul>
+</div>
+<hr class="divider">
+<div class="doc-section" id="troubleshoot">
+  <h1>Solucao de Problemas</h1>
+  <h2>WiFi nao funciona</h2>
+  <pre><code><span class="cmd">sudo rfkill unblock all</span>
+<span class="cmd">sudo systemctl restart NetworkManager</span></code></pre>
+  <h2>Boot nao aparece no UEFI</h2>
+  <pre><code><span class="cmd">sudo grub-install</span> --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=StackOS
+<span class="cmd">sudo update-grub</span></code></pre>
+  <h2>Tela preta apos boot</h2>
+  <p>No menu GRUB, selecione <strong>StackOS Genesis (modo seguro)</strong>.</p>
+</div>
+<hr class="divider">
+<div class="doc-section" id="comunidade">
+  <h1>Comunidade</h1>
+  <ul>
+    <li><a href="https://github.com/stackoslinux-dev/repo/issues" style="color:var(--blue)">GitHub Issues</a> &mdash; Bugs e problemas</li>
+    <li><a href="https://github.com/stackoslinux-dev/repo/discussions" style="color:var(--blue)">GitHub Discussions</a> &mdash; Forum</li>
+    <li><a href="mailto:stackoslinux@gmail.com" style="color:var(--blue)">stackoslinux@gmail.com</a></li>
+  </ul>
+  <div class="info-card"><p>Modular. Leve. Poderoso. Seu Stack. Suas Regras.</p></div>
+</div>
+</div>
+</body>
+</html>
