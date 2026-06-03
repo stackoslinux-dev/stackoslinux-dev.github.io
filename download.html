@@ -5,42 +5,75 @@
 <title>StackOS Genesis - Download</title>
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; }
-body { background: #05081c; color: #fff; font-family: sans-serif; display: flex; align-items: center; justify-content: center; height: 100vh; flex-direction: column; gap: 1.5rem; }
-.logo { font-size: 2rem; font-weight: bold; }
-.logo span { color: #3d78d8; }
-.msg { color: #aaa; font-size: 1.1rem; }
-.bar { width: 300px; height: 6px; background: rgba(61,120,216,0.2); border-radius: 3px; overflow: hidden; }
-.fill { height: 100%; background: linear-gradient(90deg, #3d78d8, #7b2ff7); animation: load 2s ease forwards; }
-@keyframes load { from { width: 0% } to { width: 100% } }
-.stats { color: #3d78d8; font-size: 0.9rem; }
+body { background: #05081c; color: #fff; font-family: sans-serif; min-height: 100vh; display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 2rem; padding: 2rem; }
+h1 { font-size: 2rem; } h1 span { color: #3d78d8; }
+.sub { color: #aaa; font-size: 0.95rem; }
+.cards { display: flex; flex-wrap: wrap; gap: 1.5rem; justify-content: center; max-width: 900px; }
+.card { background: rgba(255,255,255,0.04); border: 1px solid rgba(61,120,216,0.35); border-radius: 16px; padding: 1.5rem 2rem; min-width: 240px; display: flex; flex-direction: column; gap: 1rem; transition: border-color 0.2s; }
+.card:hover { border-color: #7b2ff7; }
+.card-title { font-size: 1.1rem; font-weight: bold; color: #3d78d8; }
+.card-desc { color: #aaa; font-size: 0.85rem; line-height: 1.5; }
+.btn { display: inline-block; background: linear-gradient(90deg, #3d78d8, #7b2ff7); color: #fff; padding: 0.7rem 1.5rem; border-radius: 10px; text-decoration: none; font-size: 0.95rem; text-align: center; transition: opacity 0.2s; }
+.btn:hover { opacity: 0.85; }
+.btn-secondary { background: rgba(61,120,216,0.2); border: 1px solid rgba(61,120,216,0.4); }
+.stats { background: rgba(61,120,216,0.08); border: 1px solid rgba(61,120,216,0.2); border-radius: 12px; padding: 1rem 2rem; display: flex; gap: 3rem; flex-wrap: wrap; justify-content: center; }
+.stat { text-align: center; }
+.stat-num { font-size: 1.8rem; font-weight: bold; color: #3d78d8; }
+.stat-label { color: #aaa; font-size: 0.8rem; margin-top: 0.2rem; }
+.verify { max-width: 600px; background: rgba(123,47,247,0.08); border: 1px solid rgba(123,47,247,0.2); border-radius: 12px; padding: 1.2rem 1.5rem; }
+.verify h3 { color: #7b2ff7; margin-bottom: 0.8rem; font-size: 0.95rem; }
+.verify code { background: rgba(255,255,255,0.05); padding: 0.2rem 0.5rem; border-radius: 4px; font-size: 0.82rem; color: #aaa; display: block; margin: 0.3rem 0; }
 </style>
 </head>
 <body>
-<div class="logo">⚡ Stack<span>OS</span> Genesis</div>
-<div class="msg">Preparando seu download...</div>
-<div class="bar"><div class="fill"></div></div>
-<div class="stats" id="stats">Contando downloads...</div>
-<script>
-const REPO = 'stackoslinux-dev/stackoslinux-dev.github.io';
-const FILE = 'download-count.json';
-const MEGA = 'https://mega.nz/file/C4hxVCiY#BaNcYI_14-E387zDv0ZydGMk_KKLEePLtxt5bVu1DeI';
+<div style="text-align:center">
+  <h1>⚡ Stack<span>OS</span> Genesis 1.1</h1>
+  <p class="sub">Ubuntu 26.04 • GNOME 50 • Kernel 7.0 • amd64 • ~2.0 GB</p>
+</div>
 
-async function registrar() {
+<div class="stats" id="stats">
+  <div class="stat"><div class="stat-num" id="sf-count">277</div><div class="stat-label">SourceForge</div></div>
+  <div class="stat"><div class="stat-num" id="gh-count">592</div><div class="stat-label">Usuários repo APT</div></div>
+  <div class="stat"><div class="stat-num">🏆</div><div class="stat-label">Rising Star SF</div></div>
+</div>
+
+<div class="cards">
+  <div class="card">
+    <div class="card-title">☁️ MEGA</div>
+    <div class="card-desc">Download direto e rápido. Sem limite de velocidade.</div>
+    <a class="btn" href="https://mega.nz/file/C4hxVCiY#BaNcYI_14-E387zDv0ZydGMk_KKLEePLtxt5bVu1DeI" target="_blank">⬇ Baixar via MEGA</a>
+  </div>
+  <div class="card">
+    <div class="card-title">🔶 SourceForge</div>
+    <div class="card-desc">Espelho oficial. Servidor estável com alta disponibilidade.</div>
+    <a class="btn btn-secondary" href="https://sourceforge.net/projects/stackos-genesis/files/1.1/stackos-1.1-amd64.iso/download" target="_blank">⬇ Baixar via SourceForge</a>
+  </div>
+  <div class="card">
+    <div class="card-title">🏛️ Internet Archive</div>
+    <div class="card-desc">Arquivo permanente. Preservação de longo prazo.</div>
+    <a class="btn btn-secondary" href="https://archive.org/download/stackos-genesis-1.1/stackos-1.1-amd64.iso" target="_blank">⬇ Baixar via Archive</a>
+  </div>
+</div>
+
+<div class="verify">
+  <h3>🔒 Verificar autenticidade da ISO</h3>
+  <code>gpg --keyserver hkps://keys.openpgp.org --recv-keys 056F482818FF0BFCA93F31E28E5BDB912C8A2A16</code>
+  <code>gpg --verify SHA256SUMS.asc</code>
+  <code>sha256sum -c SHA256SUMS</code>
+</div>
+
+<script>
+async function loadStats() {
   try {
-    // le o contador atual
-    const r = await fetch(`https://api.github.com/repos/${REPO}/contents/${FILE}`);
+    const r = await fetch('https://api.github.com/repos/stackoslinux-dev/stackoslinux-dev.github.io/contents/download-count.json');
     if (r.ok) {
       const data = await r.json();
       const content = JSON.parse(atob(data.content));
-      document.getElementById('stats').textContent = 
-        `Voce é o download #${(content.total || 0) + 1}!`;
+      document.getElementById('sf-count').textContent = content.sourceforge || 277;
     }
   } catch(e) {}
-  // redireciona apos 2.5 segundos
-  setTimeout(() => { window.location.href = MEGA; }, 2500);
 }
-
-registrar();
+loadStats();
 </script>
 </body>
 </html>
