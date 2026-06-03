@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>StackOS Genesis - Download</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { background: #05081c; color: #fff; font-family: sans-serif; display: flex; align-items: center; justify-content: center; height: 100vh; flex-direction: column; gap: 1.5rem; }
+.logo { font-size: 2rem; font-weight: bold; }
+.logo span { color: #3d78d8; }
+.msg { color: #aaa; font-size: 1.1rem; }
+.bar { width: 300px; height: 6px; background: rgba(61,120,216,0.2); border-radius: 3px; overflow: hidden; }
+.fill { height: 100%; background: linear-gradient(90deg, #3d78d8, #7b2ff7); animation: load 2s ease forwards; }
+@keyframes load { from { width: 0% } to { width: 100% } }
+.stats { color: #3d78d8; font-size: 0.9rem; }
+</style>
+</head>
+<body>
+<div class="logo">⚡ Stack<span>OS</span> Genesis</div>
+<div class="msg">Preparando seu download...</div>
+<div class="bar"><div class="fill"></div></div>
+<div class="stats" id="stats">Contando downloads...</div>
+<script>
+const REPO = 'stackoslinux-dev/stackoslinux-dev.github.io';
+const FILE = 'download-count.json';
+const MEGA = 'https://mega.nz/file/C4hxVCiY#BaNcYI_14-E387zDv0ZydGMk_KKLEePLtxt5bVu1DeI';
+
+async function registrar() {
+  try {
+    // le o contador atual
+    const r = await fetch(`https://api.github.com/repos/${REPO}/contents/${FILE}`);
+    if (r.ok) {
+      const data = await r.json();
+      const content = JSON.parse(atob(data.content));
+      document.getElementById('stats').textContent = 
+        `Voce é o download #${(content.total || 0) + 1}!`;
+    }
+  } catch(e) {}
+  // redireciona apos 2.5 segundos
+  setTimeout(() => { window.location.href = MEGA; }, 2500);
+}
+
+registrar();
+</script>
+</body>
+</html>
